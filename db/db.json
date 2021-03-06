@@ -1,18 +1,12 @@
 [
   {
-    "title": "Test Title",
-    "text": "Test text"
+    "title": "Testing",
+    "text": "This is a test!",
+    "id": "45103be977"
   },
   {
-    "title": "Test Title",
-    "text": "Test text"
-  },
-  {
-    "title": "This note",
-    "text": "This is new!\n"
-  },
-  {
-    "title": "Another Note",
-    "text": "Wooo!"
+    "title": "Test Note",
+    "text": "Test Text",
+    "id": "6804f68b02"
   }
 ]

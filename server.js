@@ -3,6 +3,7 @@ const fs = require('fs');
 const express = require('express');
 const PORT = process.env.PORT || 3001;
 const app = express();
+const cryptoRandomString = require('crypto-random-string');
 
 // parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
@@ -32,14 +33,14 @@ app.get('/api/notes', (req, res) => {
 // creates new note
 app.post('/api/notes', (req, res) => {
   let body = req.body;
-  console.log(body)
+  body.id = cryptoRandomString({length: 10});
   let newNotes = JSON.parse(fs.readFileSync('./db/db.json', null, 2))
   newNotes.push(body);
   fs.writeFileSync('./db/db.json', JSON.stringify(newNotes, null, 2)), err => {
     if (err) throw err;
     console.log(newNotes)
   };
-  res.send(body);
+  res.json(body);
 });
 
 app.listen(PORT, () => {
