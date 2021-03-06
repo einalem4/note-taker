@@ -30,17 +30,27 @@ app.get('/api/notes', (req, res) => {
   });
 });
 
-// creates new note
+// creates new note with a unique ID
 app.post('/api/notes', (req, res) => {
   let body = req.body;
-  body.id = cryptoRandomString({length: 10});
+  body.id = cryptoRandomString({ length: 10 });
   let newNotes = JSON.parse(fs.readFileSync('./db/db.json', null, 2))
   newNotes.push(body);
   fs.writeFileSync('./db/db.json', JSON.stringify(newNotes, null, 2)), err => {
     if (err) throw err;
-    console.log(newNotes)
   };
-  res.json(body);
+  res.send(newNotes);
+});
+
+// delete note
+app.delete('/api/notes/:id', (req, res) => {
+  let id = req.params.id.toString();
+  let readNote = JSON.parse(fs.readFileSync("./db/db.json", null, 2));
+  let deleteNote = readNote.filter(note => note.id.toString() !== id);
+  fs.writeFileSync("./db/db.json", JSON.stringify(deleteNote, null, 2)), err => {
+    if (err) throw err;
+  };
+  res.sendStatus(200);
 });
 
 app.listen(PORT, () => {
