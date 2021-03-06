@@ -2,5 +2,17 @@
   {
     "title": "Test Title",
     "text": "Test text"
+  },
+  {
+    "title": "Test Title",
+    "text": "Test text"
+  },
+  {
+    "title": "This note",
+    "text": "This is new!\n"
+  },
+  {
+    "title": "Another Note",
+    "text": "Wooo!"
   }
 ]

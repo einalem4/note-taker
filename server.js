@@ -24,11 +24,22 @@ app.get('/notes', (req, res) => {
 // reads db.json and returns all saved notes as JSON
 app.get('/api/notes', (req, res) => {
   fs.readFile('./db/db.json', (err, data) => {
-    if (err) {
-      console.error(err)
-    }
+    if (err) throw err;
     res.json(JSON.parse(data))
   });
+});
+
+// creates new note
+app.post('/api/notes', (req, res) => {
+  let body = req.body;
+  console.log(body)
+  let newNotes = JSON.parse(fs.readFileSync('./db/db.json', null, 2))
+  newNotes.push(body);
+  fs.writeFileSync('./db/db.json', JSON.stringify(newNotes, null, 2)), err => {
+    if (err) throw err;
+    console.log(newNotes)
+  };
+  res.send(body);
 });
 
 app.listen(PORT, () => {
